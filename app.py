@@ -214,11 +214,35 @@ def retrieveData():
 @app.route("/editCellData", methods=['GET','POST'])
 @cross_origin()
 def editCellData():
-    if request.method == 'POST':
-        print('hello from editCellData ')
-        data = request.data
-        #pprint(request.__dict__)
-        return request.data
+    print('hello from editCellData ')
+    res = request.json
+    # res = json.loads(res)
+    # pprint(f'posted data: {res} /n')
+    # print(f'type posted data: {type(res)} /n')
+    for key, item in res.items():
+        print(f"result dict item /n")
+        print(f"key: {key} /n")
+        print(f"item: {item} /n")
+        if key =='delete':
+            deletes=[]
+            for entry in item:
+               deletes.append(entry)
+                # print(f'iteam from the secon loop: {entry}')
+                # for x,y in entry.items():
+                #     print(f'value of keys from the secon loop: {x}')
+        elif key =='edit':
+            edits=[]
+            for entry in item:
+               edits.append(entry)
+        elif key =='insert':
+            inserts=[]
+            for entry in item:
+               inserts.append(entry)
+
+    # for item in res:
+    #     print(f'posted item: {item}')
+    #     print(f'type posted item: {type(item)}')
+    return ''
 
 @app.route("/deleteTeam", methods=['GET','POST','PUT','DELETE'])
 @cross_origin()
